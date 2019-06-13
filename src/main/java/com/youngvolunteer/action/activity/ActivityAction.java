@@ -131,7 +131,7 @@ public class ActivityAction extends ActionSupport implements ModelDriven<Volunte
 
         r = R.ok().put("data",allVolunteerActivity.getRows());
 
-        logger.info("$$$$$$$$$$$$$"+userId+limit);
+        logger.info("$$$$$$$$$$$$$$$"+userId+limit);
 
         logger.info("查询列表："+r);
 
