@@ -1,0 +1,14 @@
+{
+	"cmsName": "人流量监管系统",
+	"version": "v1.0",
+	"author": "soldier",
+	"homePage": "index.html",
+	"server": "Linux",
+	"dataBase": "Mysql5.7",
+	"maxUpload": "2M",
+	"userRights": "超级管理员",
+	"description": "人流量监管系统",
+	"powerby": "copyright @ 2019 soldier",
+	"record": "京ICP备14040xxx号-1",
+	"keywords": "人流量监管系统"
+}

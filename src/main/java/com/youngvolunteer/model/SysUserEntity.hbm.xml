@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.youngvolunteer.model.SysUserEntity" table="sys_user" schema="young_volunteer">
+        <id name="userId">
+            <column name="user_id" sql-type="int(11)"/>
+        </id>
+        <property name="loginAccount">
+            <column name="login_account" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="loginPassword">
+            <column name="login_password" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="userName">
+            <column name="user_name" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="roleType">
+            <column name="role_type" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="userAvailable">
+            <column name="user_available" sql-type="int(2)"/>
+        </property>
+    </class>
+</hibernate-mapping>

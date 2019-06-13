@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.youngvolunteer.model.VolunteerSignUpEntity" table="volunteer_sign_up"
+           schema="young_volunteer">
+        <id name="signUpId">
+            <column name="sign_up_id" sql-type="int(11)"/>
+        </id>
+        <property name="signIn">
+            <column name="sign_in" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="volunteerScore">
+            <column name="volunteer_score" sql-type="double" precision="-1" not-null="true"/>
+        </property>
+        <property name="volunteerId">
+            <column name="volunteer_id" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="activityId">
+            <column name="activity_id" sql-type="varchar(255)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

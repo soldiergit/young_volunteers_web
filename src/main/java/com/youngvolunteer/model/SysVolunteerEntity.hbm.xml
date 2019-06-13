@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.youngvolunteer.model.SysVolunteerEntity" table="sys_volunteer" schema="young_volunteer">
+        <id name="volunteerId">
+            <column name="volunteer_id" sql-type="int(11)"/>
+        </id>
+        <property name="volunteerCode">
+            <column name="volunteer_code" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerClass">
+            <column name="volunteer_class" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerCollege">
+            <column name="volunteer_college" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerJoinTime">
+            <column name="volunteer_join_time" sql-type="date" not-null="true"/>
+        </property>
+        <property name="volunteerEmail">
+            <column name="volunteer_email" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerName">
+            <column name="volunteer_name" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerPhone">
+            <column name="volunteer_phone" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="volunteerSex">
+            <column name="volunteer_sex" sql-type="int(11)" not-null="true"/>
+        </property>
+        <one-to-one name="user" class="com.youngvolunteer.model.SysUserEntity"/>
+    </class>
+</hibernate-mapping>

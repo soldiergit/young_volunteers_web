@@ -1,0 +1,89 @@
+{
+	"contentManagement": [
+		{
+			"title": "志愿者管理",
+			"icon": "&#xe612;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "志愿者列表",
+					"icon": "&#xe612;",
+					"href": "/young_volunteers_web_war/page/system/volunteer/volunteerList.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "活动管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "活动列表",
+					"icon": "&#xe61c;",
+					"href": "/young_volunteers_web_war/page/system/activity/activityList.html",
+					"spread": false
+				}
+			]
+		},
+
+		{
+			"title": "报名管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "未报名活动",
+					"icon": "&#xe61c;",
+					"href": "/young_volunteers_web_war/page/system/signup/noSignUpactivityList.html",
+					"spread": false
+				},
+				{
+					"title": "已报名活动",
+					"icon": "&#xe61c;",
+					"href": "/young_volunteers_web_war/page/system/signup/signUpactivityList.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "打分管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "未打分活动",
+					"icon": "&#xe61c;",
+					"href": "/young_volunteers_web_war/page/system/score/noScoreList.html",
+					"spread": false
+				},
+				{
+					"title": "打分列表",
+					"icon": "&#xe61c;",
+					"href": "/young_volunteers_web_war/page/system/score/scoreList.html",
+					"spread": false
+				}
+			]
+		},
+		{
+			"title": "签到管理",
+			"icon": "&#xe630;",
+			"href": "",
+			"spread": false,
+			"children": [
+				{
+					"title": "活动签到",
+					"icon": "&#xe61c;",
+					"href": "/young_volunteers_web_war/page/system/signin/signinList.html",
+					"spread": false
+				}
+			]
+		}
+	]
+}
+
+

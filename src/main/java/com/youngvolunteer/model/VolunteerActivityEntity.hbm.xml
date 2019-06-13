@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.youngvolunteer.model.VolunteerActivityEntity" table="volunteer_activity"
+           schema="young_volunteer">
+        <id name="activityId">
+            <column name="activity_id" sql-type="int(11)"/>
+        </id>
+        <property name="activityCode">
+            <column name="activity_code" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="activityTitle">
+            <column name="activity_title" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="activityContent">
+            <column name="activity_content" sql-type="varchar(5000)" length="5000" not-null="true"/>
+        </property>
+        <property name="activityPeopleNum">
+            <column name="activity_people_num" sql-type="int(11)" not-null="true"/>
+        </property>
+        <property name="activityLeader">
+            <column name="activity_leader" sql-type="varchar(255)" not-null="true"/>
+        </property>
+        <property name="activityStartTime">
+            <column name="activity_start_time" sql-type="date" not-null="true"/>
+        </property>
+        <property name="activityEndTime">
+            <column name="activity_end_time" sql-type="date" not-null="true"/>
+        </property>
+        <property name="activitySignStartTime">
+            <column name="activity_sign_start_time" sql-type="date" not-null="true"/>
+        </property>
+        <property name="activitySignEndTime">
+            <column name="activity_sign_end_time" sql-type="date" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>
