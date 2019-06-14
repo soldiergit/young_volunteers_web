@@ -67,4 +67,38 @@ public interface ActivityService {
      * @return
      */
     PageBean findAllVolunteerNojoinActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId);
+
+    /**
+     * 查询已签到的活动
+     * @param key
+     * @param setPageSize
+     * @param userId
+     * @return
+     */
+    PageBean findAllVolunteerSigninActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId);
+
+    /**
+     * 查询未签到的活动
+     * @param key
+     * @param setPageSize
+     * @param userId
+     * @return
+     */
+    PageBean findAllVolunteerNoSigninActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId);
+
+    /**
+     * 查询已评分的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    PageBean findAllAdminScoreActivity(String key, PageBean<VolunteerActivityEntity> setPageSize);
+
+    /**
+     * 查询未评分的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    PageBean findAllAdminNOScoreActivity(String key, PageBean<VolunteerActivityEntity> setPageSize);
 }

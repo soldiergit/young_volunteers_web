@@ -33,11 +33,14 @@
 	<table id="userList" lay-filter="userList"></table>
 
 	<!--操作-->
-	<script type="text/html" id="userListBar">
-		<!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
-		<!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>-->
-		<a class="layui-btn layui-btn-xs" lay-event="signin">签到</a>
-	</script>
+	<!--<script type="text/html" id="userListBar">-->
+		<!--{{# if(d.signIn ==1){ }}-->
+		<!--<a class="layui-btn layui-btn-xs layui-btn-danger" disabled="">已签到</a>-->
+		<!--&lt;!&ndash;<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>&ndash;&gt;-->
+		<!--{{# }if(d.signIn !=1){ }}-->
+		<!--<a class="layui-btn layui-btn-xs" lay-event="signin">签到</a>-->
+		<!--{{#  } }}-->
+	<!--</script>-->
 </form>
 <script type="text/javascript" src="/young_volunteers_web_war/layui/layui.js"></script>
 <script type="text/javascript" src="signinList.js"></script>

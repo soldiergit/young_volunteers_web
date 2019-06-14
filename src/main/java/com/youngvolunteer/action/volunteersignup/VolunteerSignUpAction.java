@@ -1,7 +1,9 @@
 package com.youngvolunteer.action.volunteersignup;
 
 import com.youngvolunteer.common.PageBean;
+import com.youngvolunteer.model.VolunteerActivityEntity;
 import com.youngvolunteer.model.VolunteerSignUpEntity;
+import com.youngvolunteer.service.activity.ActivityService;
 import com.youngvolunteer.service.volunteer.VolunteerService;
 import com.youngvolunteer.service.volunteersignup.VolunteerSignUpService;
 import com.youngvolunteer.vo.R;
@@ -23,6 +25,8 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
     private VolunteerSignUpService volunteerSignUpService;
     @Autowired
     private VolunteerService volunteerService;
+    @Autowired
+    private ActivityService activityService;
     //日志
     private static Logger logger = Logger.getLogger(VolunteerSignUpEntity.class);
     //模型驱动
@@ -41,6 +45,10 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
     private String ids;
     //用户id
     private String userId;
+    //用户姓名
+    private String userName;
+    //活动内容
+    private VolunteerActivityEntity volunteerActivityEntity;
 
 
     //////////////////////////////////////////////////////
@@ -51,6 +59,8 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
 
         //查询志愿者id
         volunteerSignUpEntity.setVolunteerId(userId);
+        //查询志愿者姓名
+        volunteerSignUpEntity.setVolunteerId(userName);
 
         logger.info("报名："+volunteerSignUpEntity);
 
@@ -67,6 +77,24 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
     public String deleteVolunteerSignUp(){
 
         volunteerSignUpService.deleteVolunteerSignUp(volunteerSignUpEntity);
+
+        r = R.ok();
+
+        return SUCCESS;
+    }
+
+    /**
+     * 签到
+     */
+    public String volunteerSignIn(){
+
+        //查询志愿者id
+        volunteerSignUpEntity.setVolunteerId(userId);
+
+        volunteerSignUpEntity = volunteerSignUpService.findOneVolunteerSignUp(volunteerSignUpEntity);
+        volunteerSignUpEntity.setSignIn(1);
+
+        volunteerSignUpService.updateVolunteerSignUp(volunteerSignUpEntity);
 
         r = R.ok();
 
@@ -92,6 +120,10 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
     public String findOneVolunteerSignUp(){
 
         VolunteerSignUpEntity oneVolunteerSignUp = volunteerSignUpService.findOneVolunteerSignUp(volunteerSignUpEntity);
+
+        //获取活动内容
+        volunteerActivityEntity.setActivityId(Integer.parseInt(oneVolunteerSignUp.getActivityId()));
+        VolunteerActivityEntity oneVolunteery = activityService.findOneVolunteery(volunteerActivityEntity);
 
         r = R.ok().put("data",oneVolunteerSignUp);
 
@@ -194,5 +226,21 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public VolunteerActivityEntity getVolunteerActivityEntity() {
+        return volunteerActivityEntity;
+    }
+
+    public void setVolunteerActivityEntity(VolunteerActivityEntity volunteerActivityEntity) {
+        this.volunteerActivityEntity = volunteerActivityEntity;
     }
 }

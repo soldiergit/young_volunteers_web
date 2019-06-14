@@ -71,7 +71,15 @@ public class VolunteerSignUpDaoImpl implements VolunteerSignUpDao {
 
         Criteria criteria = currentSession.createCriteria(VolunteerSignUpEntity.class);
 
-        List<VolunteerSignUpEntity> list = criteria.add(Restrictions.eq("userId", volunteerSignUpEntity.getSignUpId())).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        //志愿者签到，需要把活动id和个人id传过来
+        if (volunteerSignUpEntity.getActivityId() != null && volunteerSignUpEntity.getVolunteerId() != null) {
+            criteria.add(Restrictions.eq("activityId", volunteerSignUpEntity.getActivityId()));
+            criteria.add(Restrictions.eq("volunteerId", volunteerSignUpEntity.getVolunteerId()));
+        } else {
+            criteria.add(Restrictions.eq("userId", volunteerSignUpEntity.getSignUpId()));
+        }
+
+        List<VolunteerSignUpEntity> list = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
 
         currentSession.close();
 

@@ -151,6 +151,7 @@ public class ActivityDaoImpl implements ActivityDao {
          */
         Criteria criteria = session.createCriteria(VolunteerActivityEntity.class, "activity");
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(VolunteerSignUpEntity.class,"signUp");
+        //匹配当前用户
         detachedCriteria.add(Restrictions.eq("volunteerId", userId));
         detachedCriteria.add(Property.forName("activity.activityId").eqProperty("signUp.activityId"));
         criteria.add(Subqueries.exists(detachedCriteria.setProjection(Projections.property("signUp.signUpId"))));
@@ -192,9 +193,182 @@ public class ActivityDaoImpl implements ActivityDao {
          */
         Criteria criteria = session.createCriteria(VolunteerActivityEntity.class, "activity");
         DetachedCriteria detachedCriteria = DetachedCriteria.forClass(VolunteerSignUpEntity.class,"signUp");
+        //匹配当前用户
         detachedCriteria.add(Restrictions.eq("volunteerId", userId));
         detachedCriteria.add(Property.forName("activity.activityId").eqProperty("signUp.activityId"));
         criteria.add(Subqueries.notExists(detachedCriteria.setProjection(Projections.property("signUp.signUpId"))));
+
+        if (key != null && !key.equals("")) {
+            //搜索
+            List list = criteria.add(
+                    Restrictions.or(
+                            Restrictions.or(Restrictions.like("activityCode", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityTitle", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityContent", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityLeader", key, MatchMode.ANYWHERE))))
+                    .setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() )
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).list();
+            setPageSize.setRows(list);
+        } else {
+            setPageSize.setRows(criteria.setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize())
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
+        }
+
+        session.close();
+
+        return setPageSize;
+    }
+
+    /**
+     * 查询已签到的活动
+     * @param key
+     * @param setPageSize
+     * @param userId
+     * @return
+     */
+    @Override
+    public PageBean findAllVolunteerSigninActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId) {
+        Session session = sessionFactory.openSession();
+
+        /**
+         * hibernate 利用子查询实现 exists 功能
+         */
+        Criteria criteria = session.createCriteria(VolunteerActivityEntity.class, "activity");
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(VolunteerSignUpEntity.class,"signUp");
+        //匹配当前用户
+        detachedCriteria.add(Restrictions.eq("volunteerId", userId));
+        //匹配signIn字段为1
+        detachedCriteria.add(Restrictions.eq("signIn", 1));
+        //匹配活动表的活动id = 报名表的活动id
+        detachedCriteria.add(Property.forName("activity.activityId").eqProperty("signUp.activityId"));
+        criteria.add(Subqueries.exists(detachedCriteria.setProjection(Projections.property("signUp.signUpId"))));
+
+        if (key != null && !key.equals("")) {
+            //搜索
+            List list = criteria.add(
+                    Restrictions.or(
+                            Restrictions.or(Restrictions.like("activityCode", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityTitle", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityContent", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityLeader", key, MatchMode.ANYWHERE))))
+                    .setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() )
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).list();
+            setPageSize.setRows(list);
+        } else {
+            setPageSize.setRows(criteria.setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize())
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
+        }
+
+        session.close();
+
+        return setPageSize;
+    }
+
+    /**
+     * 查询未签到的活动
+     * @param key
+     * @param setPageSize
+     * @param userId
+     * @return
+     */
+    @Override
+    public PageBean findAllVolunteerNoSigninActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId) {
+        Session session = sessionFactory.openSession();
+
+        /**
+         * hibernate 利用子查询实现 exists 功能
+         */
+        Criteria criteria = session.createCriteria(VolunteerActivityEntity.class, "activity");
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(VolunteerSignUpEntity.class,"signUp");
+        //匹配当前用户
+        detachedCriteria.add(Restrictions.eq("volunteerId", userId));
+        //匹配signIn字段不等于1
+        detachedCriteria.add(Restrictions.ne("signIn", 1));
+        //匹配活动表的活动id = 报名表的活动id
+        detachedCriteria.add(Property.forName("activity.activityId").eqProperty("signUp.activityId"));
+        criteria.add(Subqueries.exists(detachedCriteria.setProjection(Projections.property("signUp.signUpId"))));
+
+        if (key != null && !key.equals("")) {
+            //搜索
+            List list = criteria.add(
+                    Restrictions.or(
+                            Restrictions.or(Restrictions.like("activityCode", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityTitle", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityContent", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityLeader", key, MatchMode.ANYWHERE))))
+                    .setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() )
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).list();
+            setPageSize.setRows(list);
+        } else {
+            setPageSize.setRows(criteria.setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize())
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
+        }
+
+        session.close();
+
+        return setPageSize;
+    }
+
+    /**
+     * 查询已评分的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    @Override
+    public PageBean findAllAdminScoreActivity(String key, PageBean<VolunteerActivityEntity> setPageSize) {
+
+        Session session = sessionFactory.openSession();
+
+        /**
+         * hibernate 利用子查询实现 exists 功能
+         */
+        Criteria criteria = session.createCriteria(VolunteerActivityEntity.class, "activity");
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(VolunteerSignUpEntity.class,"signUp");
+        detachedCriteria.add(Restrictions.isNotNull("volunteerScore"));
+        detachedCriteria.add(Property.forName("activity.activityId").eqProperty("signUp.activityId"));
+        criteria.add(Subqueries.exists(detachedCriteria.setProjection(Projections.property("signUp.signUpId"))));
+
+        if (key != null && !key.equals("")) {
+            //搜索
+            List list = criteria.add(
+                    Restrictions.or(
+                            Restrictions.or(Restrictions.like("activityCode", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityTitle", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityContent", key, MatchMode.ANYWHERE)),
+                            Restrictions.or(Restrictions.like("activityLeader", key, MatchMode.ANYWHERE))))
+                    .setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() )
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).list();
+            setPageSize.setRows(list);
+        } else {
+            setPageSize.setRows(criteria.setFirstResult((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize())
+                    .setMaxResults((setPageSize.getCurrPage() - 1) * setPageSize.getPageSize() + setPageSize.getPageSize()).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
+        }
+
+        session.close();
+
+        return setPageSize;
+    }
+
+    /**
+     * 查询未评分的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    @Override
+    public PageBean findAllAdminNOScoreActivity(String key, PageBean<VolunteerActivityEntity> setPageSize) {
+
+        Session session = sessionFactory.openSession();
+
+        /**
+         * hibernate 利用子查询实现 exists 功能
+         */
+        Criteria criteria = session.createCriteria(VolunteerActivityEntity.class, "activity");
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(VolunteerSignUpEntity.class,"signUp");
+        detachedCriteria.add(Restrictions.isNull("volunteerScore"));
+        detachedCriteria.add(Property.forName("activity.activityId").eqProperty("signUp.activityId"));
+        criteria.add(Subqueries.exists(detachedCriteria.setProjection(Projections.property("signUp.signUpId"))));
 
         if (key != null && !key.equals("")) {
             //搜索

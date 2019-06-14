@@ -8,7 +8,7 @@ layui.use(['form','layer','table','laytpl'],function(){
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : '../../../biz/activity_findAllVolunteerActivity.action',
+        url : '../../../biz/volunteersignup_findAllVolunteerSignUp.action',
         cellMinWidth : 95,
         page : true,
         height : "full-125",
@@ -17,15 +17,14 @@ layui.use(['form','layer','table','laytpl'],function(){
         id : "userListTable",
         cols : [[
             {type: "checkbox", fixed:"left", width:50},
-            {field: 'activityCode', title: '活动编号', align:'center'},
-            {field: 'activityTitle', title: '活动标题', minWidth:100, align:"center"},
-            {field: 'activityContent', title: '活动内容', minWidth:200, align:'center'},
-            {field: 'activityLeader', title: '活动负责人', minWidth:200, align:'center'},
-            {field: 'activityPeopleNum', title: '活动人数', minWidth:200, align:'center'},
-            {field: 'activityStartTime', title: '活动开始时间', minWidth:200, align:'center'},
-            {field: 'activityEndTime', title: '活动结束时间', minWidth:200, align:'center'},
-            {field: 'activitySignStartTime', title: '活动报名开始时间', minWidth:200, align:'center'},
-            {field: 'activitySignEndTime', title: '活动报名结束时间', minWidth:200, align:'center'},
+            {field: 'signUpId', title: '签到编号', align:'center'},
+            {field: 'signIn', title: '是否签到', minWidth:100, align:'center',templet:function(d){
+                    return d.signIn==1?'已签到':'未签到';
+                }},
+            {field: 'volunteerId', title: '志愿者ID', minWidth:200, align:'center'},
+            {field: 'volunteerName', title: '志愿者姓名', minWidth:200, align:'center'},
+            {field: 'volunteerScore', title: '获得分数', minWidth:200, align:'center'},
+            {field: 'activityId', title: '活动ID', minWidth:200, align:'center'},
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -51,36 +50,32 @@ layui.use(['form','layer','table','laytpl'],function(){
     });
 
     //添加用户
-    // function addUser(edit){
-    //     var index = layui.layer.open({
-    //         title : "添加",
-    //         type : 2,
-    //         content : "activityAdd.html",
-    //         success : function(layero, index){
-    //             var body = layui.layer.getChildFrame('body', index);
-    //             if(edit){
-    //                 body.find(".Id").val(edit.activityId);
-    //                 body.find(".activityCode").val(edit.activityCode);
-    //                 body.find(".activityTitle").val(edit.activityTitle);
-    //                 body.find(".activityLeader").val(edit.activityLeader);
-    //                 body.find(".activityPeopleNum").val(edit.activityPeopleNum);
-    //                 body.find(".activityContent").val(edit.activityContent);
-    //                 body.find(".activityStartTime").val(edit.activityStartTime);
-    //                 body.find(".activityEndTime").val(edit.activityEndTime);
-    //                 body.find(".activitySignStartTime").val(edit.activitySignStartTime);
-    //                 body.find(".activitySignEndTime").val(edit.activitySignEndTime);
-    //                 body.find(".updateFlag").val(1);//更新
-    //                 form.render();
-    //             }
-    //         }
-    //     })
-    //     layui.layer.full(index);
-    //     window.sessionStorage.setItem("index",index);
-    //     //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
-    //     $(window).on("resize",function(){
-    //         layui.layer.full(window.sessionStorage.getItem("index"));
-    //     })
-    // }
+    function addUser(edit, updateFlag){
+        var index = layui.layer.open({
+            title : "添加",
+            type : 2,
+            content : "scoreAdd.html",
+            success : function(layero, index){
+                var body = layui.layer.getChildFrame('body', index);
+                if(edit){
+                    body.find(".Id").val(edit.signUpId);
+                    body.find(".volunteerId").val(edit.volunteerId);
+                    body.find(".activityId").val(edit.activityId);
+                    body.find(".signIn").val(edit.signIn);
+                    body.find(".volunteerName").val(edit.volunteerName);
+                    body.find(".volunteerScore").val(edit.volunteerScore);
+                    body.find(".updateFlag").val(updateFlag);//更新
+                    form.render();
+                }
+            }
+        })
+        layui.layer.full(index);
+        window.sessionStorage.setItem("index",index);
+        //改变窗口大小时，重置弹窗的宽高，防止超出可视区域（如F12调出debug的操作）
+        $(window).on("resize",function(){
+            layui.layer.full(window.sessionStorage.getItem("index"));
+        })
+    }
     // $(".addNews_btn").click(function(){
     //     addUser();
     // })
@@ -117,66 +112,48 @@ layui.use(['form','layer','table','laytpl'],function(){
         var layEvent = obj.event,
             data = obj.data;
 
-        // if(layEvent === 'edit'){ //编辑
-        //     addUser(data);
-        // }else if(layEvent === 'usable'){ //启用禁用
-        //     var _this = $(this),
-        //         usableText = "是否确定禁用此用户？",
-        //         btnText = "已禁用";
-        //     if(_this.text()=="已禁用"){
-        //         usableText = "是否确定启用此用户？",
-        //         btnText = "已启用";
-        //     }
-        //     layer.confirm(usableText,{
-        //         icon: 3,
-        //         title:'系统提示',
-        //         cancel : function(index){
-        //             layer.close(index);
-        //         }
-        //     },function(index){
-        //         _this.text(btnText);
-        //         layer.close(index);
-        //     },function(index){
-        //         layer.close(index);
-        //     });
-        // }else
-            if(layEvent === 'del'){ //删除
-            layer.confirm('确定删除此记录？',{icon:3, title:'提示信息'},function(index){
-                $.get("../../../biz/volunteersignup_saveVolunteerSignUp.action",{
-                    activityId : data.activityId  //将需要删除的newsId作为参数传入
-                },function(data){
-                    if (data.code === 0){
-                        layer.msg("删除成功");
-                    }else {
-                        layer.msg("删除失败");
-                    }
-                    tableIns.reload();
-                    layer.close(index);
-                })
-            });
+        if(layEvent === 'edit'){ //编辑
+            layer.alert("编辑")
+            addUser(data, 0);
+        }else if(layEvent === 'scoring'){ //评分
+            layer.alert("评分")
+            addUser(data, 1);
+            // layer.confirm('确定打分此活动？',{icon:3, title:'提示信息'},function(index){
+            //     $.get("../../../biz/volunteersignup_saveVolunteerSignUp.action",{
+            //         activityId : data.activityId,  //将需要打分的newsId作为参数传入
+            //         userId : window.sessionStorage.getItem("userId")
+            //     },function(data){
+            //         if (data.code === 0){
+            //             layer.msg("报名成功");
+            //         }else {
+            //             layer.msg("报名失败");
+            //         }
+            //         tableIns.reload();
+            //         layer.close(index);
+            //     })
+            // });
         }
+        // }else if(layEvent === 'del'){ //删除
+        //     layer.confirm('确定删除此记录？',{icon:3, title:'提示信息'},function(index){
+        //         $.get("../../../biz/volunteersignup_saveVolunteerSignUp.action",{
+        //             activityId : data.activityId  //将需要删除的newsId作为参数传入
+        //         },function(data){
+        //             if (data.code === 0){
+        //                 layer.msg("删除成功");
+        //             }else {
+        //                 layer.msg("删除失败");
+        //             }
+        //             tableIns.reload();
+        //             layer.close(index);
+        //         })
+        //     });
+        // }
     });
 
     //列表操作
     table.on('tool(userList)', function(obj){
         var layEvent = obj.event,
             data = obj.data;
-        if(layEvent === 'scoring'){
-            layer.confirm('确定打分此活动？',{icon:3, title:'提示信息'},function(index){
-                $.get("../../../biz/volunteersignup_saveVolunteerSignUp.action",{
-                    activityId : data.activityId,  //将需要打分的newsId作为参数传入
-                    userId : window.sessionStorage.getItem("userId")
-                },function(data){
-                    if (data.code === 0){
-                        layer.msg("报名成功");
-                    }else {
-                        layer.msg("报名失败");
-                    }
-                    tableIns.reload();
-                    layer.close(index);
-                })
-            });
-        }
     });
 
 })

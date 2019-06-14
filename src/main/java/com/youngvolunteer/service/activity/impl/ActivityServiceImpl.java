@@ -96,4 +96,48 @@ public class ActivityServiceImpl implements ActivityService {
     public PageBean findAllVolunteerNojoinActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId) {
         return activityDao.findAllVolunteerNojoinActivity(key,setPageSize, userId);
     }
+
+    /**
+     * 查询已签到的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    @Override
+    public PageBean findAllVolunteerSigninActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId) {
+        return activityDao.findAllVolunteerSigninActivity(key, setPageSize, userId);
+    }
+
+    /**
+     * 查询未签到的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    @Override
+    public PageBean findAllVolunteerNoSigninActivity(String key, PageBean<VolunteerActivityEntity> setPageSize, String userId) {
+        return activityDao.findAllVolunteerNoSigninActivity(key, setPageSize, userId);
+    }
+
+    /**
+     * 查询已评分的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    @Override
+    public PageBean findAllAdminScoreActivity(String key, PageBean<VolunteerActivityEntity> setPageSize) {
+        return activityDao.findAllAdminScoreActivity(key, setPageSize);
+    }
+
+    /**
+     * 查询未评分的活动
+     * @param key
+     * @param setPageSize
+     * @return
+     */
+    @Override
+    public PageBean findAllAdminNOScoreActivity(String key, PageBean<VolunteerActivityEntity> setPageSize) {
+        return activityDao.findAllAdminNOScoreActivity(key, setPageSize);
+    }
 }

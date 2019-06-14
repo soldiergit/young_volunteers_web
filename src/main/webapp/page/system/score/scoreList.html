@@ -31,12 +31,14 @@
 		</form>
 	</blockquote>
 	<table id="userList" lay-filter="userList"></table>
-
 	<!--操作-->
 	<script type="text/html" id="userListBar">
-		<!--<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>-->
+		{{# if(d.volunteerScore !=null){ }}
+		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 		<!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>-->
-		<a class="layui-btn layui-btn-xs" lay-event="scoring">打分</a>
+		{{# }if(d.volunteerScore ==null){ }}
+		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="scoring">打分</a>
+		{{#  } }}
 	</script>
 </form>
 <script type="text/javascript" src="/young_volunteers_web_war/layui/layui.js"></script>

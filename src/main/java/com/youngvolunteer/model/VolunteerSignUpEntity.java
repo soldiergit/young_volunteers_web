@@ -16,6 +16,7 @@ public class VolunteerSignUpEntity {
     private Integer signIn;
     private Double volunteerScore;
     private String volunteerId;
+    private String volunteerName;
     private String activityId;
 
     @Id
@@ -59,6 +60,16 @@ public class VolunteerSignUpEntity {
     }
 
     @Basic
+    @Column(name = "volunteer_name", nullable = true, length = 255)
+    public String getVolunteerName() {
+        return volunteerName;
+    }
+
+    public void setVolunteerName(String volunteerName) {
+        this.volunteerName = volunteerName;
+    }
+
+    @Basic
     @Column(name = "activity_id", nullable = true, length = 255)
     public String getActivityId() {
         return activityId;
@@ -80,6 +91,8 @@ public class VolunteerSignUpEntity {
         if (volunteerScore != null ? !volunteerScore.equals(that.volunteerScore) : that.volunteerScore != null)
             return false;
         if (volunteerId != null ? !volunteerId.equals(that.volunteerId) : that.volunteerId != null) return false;
+        if (volunteerName != null ? !volunteerName.equals(that.volunteerName) : that.volunteerName != null)
+            return false;
         if (activityId != null ? !activityId.equals(that.activityId) : that.activityId != null) return false;
 
         return true;
@@ -91,6 +104,7 @@ public class VolunteerSignUpEntity {
         result = 31 * result + (signIn != null ? signIn.hashCode() : 0);
         result = 31 * result + (volunteerScore != null ? volunteerScore.hashCode() : 0);
         result = 31 * result + (volunteerId != null ? volunteerId.hashCode() : 0);
+        result = 31 * result + (volunteerName != null ? volunteerName.hashCode() : 0);
         result = 31 * result + (activityId != null ? activityId.hashCode() : 0);
         return result;
     }

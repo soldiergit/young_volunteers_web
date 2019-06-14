@@ -156,6 +156,70 @@ public class ActivityAction extends ActionSupport implements ModelDriven<Volunte
     }
 
     /**
+     * sign in
+     * @return
+     */
+    public String findAllVolunteerSigninActivity(){
+
+        PageBean allVolunteerActivity = activityService.findAllVolunteerJoinActivity(key, new PageBean<VolunteerActivityEntity>().setCurrPage(page).setPageSize(limit), userId);
+
+        r = R.ok().put("data",allVolunteerActivity.getRows());
+
+        logger.info("$$$$$$$$$$$$$$$"+userId+limit);
+
+        logger.info("查询列表："+r);
+
+        return SUCCESS;
+    }
+
+    /**
+     * no sign in
+     * @return
+     */
+    public String findAllVolunteerNoSigninActivity(){
+
+        PageBean allVolunteerActivity = activityService.findAllVolunteerNojoinActivity(key, new PageBean<VolunteerActivityEntity>().setCurrPage(page).setPageSize(limit), userId);
+
+        r = R.ok().put("data",allVolunteerActivity.getRows());
+
+        logger.info("$$$$$$$$$$$$$"+userId+limit);
+
+        logger.info("查询列表："+r);
+
+        return SUCCESS;
+    }
+
+    /**
+     * scoring
+     * @return
+     */
+    public String findAllAdminScoreActivity(){
+
+        PageBean allVolunteerActivity = activityService.findAllAdminScoreActivity(key, new PageBean<VolunteerActivityEntity>().setCurrPage(page).setPageSize(limit));
+
+        r = R.ok().put("data",allVolunteerActivity.getRows());
+
+        logger.info("查询已评分列表："+r);
+
+        return SUCCESS;
+    }
+
+    /**
+     * no scoring
+     * @return
+     */
+    public String findAllAdminNOScoreActivity(){
+
+        PageBean allVolunteerActivity = activityService.findAllAdminNOScoreActivity(key, new PageBean<VolunteerActivityEntity>().setCurrPage(page).setPageSize(limit));
+
+        r = R.ok().put("data",allVolunteerActivity.getRows());
+
+        logger.info("查询列表："+r);
+
+        return SUCCESS;
+    }
+
+    /**
      * 批量删除
      */
     public String deleteAllVolunteerActivity(){

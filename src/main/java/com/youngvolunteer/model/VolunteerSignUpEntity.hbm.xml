@@ -18,6 +18,9 @@
         <property name="volunteerId">
             <column name="volunteer_id" sql-type="varchar(255)" not-null="true"/>
         </property>
+        <property name="volunteerName">
+            <column name="volunteer_name" sql-type="varchar(255)" not-null="true"/>
+        </property>
         <property name="activityId">
             <column name="activity_id" sql-type="varchar(255)" not-null="true"/>
         </property>

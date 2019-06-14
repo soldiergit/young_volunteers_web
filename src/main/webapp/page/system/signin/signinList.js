@@ -2,13 +2,13 @@ layui.use(['form','layer','table','laytpl'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
-        laytpl = layui.laytpl,
+        // laytpl = layui.laytpl,
         table = layui.table;
 
     //用户列表
     var tableIns = table.render({
         elem: '#userList',
-        url : '../../../biz/activity_findAllVolunteerJoinActivity.action',
+        url : '../../../biz/activity_findAllVolunteerSigninActivity.action',
         //url地址参数  -where
         where: {userId: window.sessionStorage.getItem("userId")},
         cellMinWidth : 95,
@@ -120,10 +120,9 @@ layui.use(['form','layer','table','laytpl'],function(){
             data = obj.data;
         if(layEvent === 'signin'){
             layer.confirm('确定签到此活动？',{icon:3, title:'提示信息'},function(index){
-                $.get("../../../biz/volunteersignup_updateVolunteerSignUp.action",{
+                $.get("../../../biz/volunteersignup_volunteerSignIn.action",{
                     activityId : data.activityId,  //将需要签到的newsId作为参数传入
                     userId : window.sessionStorage.getItem("userId"),
-                    signIn: 1
                 },function(data){
                     if (data.code === 0){
                         layer.msg("签到成功");

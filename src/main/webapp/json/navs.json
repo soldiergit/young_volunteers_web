@@ -56,12 +56,6 @@
 			"spread": false,
 			"children": [
 				{
-					"title": "未打分活动",
-					"icon": "&#xe61c;",
-					"href": "/young_volunteers_web_war/page/system/score/noScoreList.html",
-					"spread": false
-				},
-				{
 					"title": "打分列表",
 					"icon": "&#xe61c;",
 					"href": "/young_volunteers_web_war/page/system/score/scoreList.html",
@@ -76,7 +70,13 @@
 			"spread": false,
 			"children": [
 				{
-					"title": "活动签到",
+					"title": "未签到活动",
+					"icon": "&#xe61c;",
+					"href": "/young_volunteers_web_war/page/system/signin/noSigninList.html",
+					"spread": false
+				},
+				{
+					"title": "已签到活动",
 					"icon": "&#xe61c;",
 					"href": "/young_volunteers_web_war/page/system/signin/signinList.html",
 					"spread": false
