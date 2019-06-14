@@ -21,10 +21,11 @@ layui.use(['form','layer','table','laytpl'],function(){
             {field: 'signIn', title: '是否签到', minWidth:100, align:'center',templet:function(d){
                     return d.signIn==1?'已签到':'未签到';
                 }},
-            {field: 'volunteerId', title: '志愿者ID', minWidth:200, align:'center'},
+            // {field: 'volunteerId', title: '志愿者ID', minWidth:200, align:'center'},
+            // {field: 'activityId', title: '活动ID', minWidth:200, align:'center'},
             {field: 'volunteerName', title: '志愿者姓名', minWidth:200, align:'center'},
             {field: 'volunteerScore', title: '获得分数', minWidth:200, align:'center'},
-            {field: 'activityId', title: '活动ID', minWidth:200, align:'center'},
+            {field: 'activityContent', title: '活动内容', minWidth:200, align:'center'},
             {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });
@@ -63,6 +64,7 @@ layui.use(['form','layer','table','laytpl'],function(){
                     body.find(".activityId").val(edit.activityId);
                     body.find(".signIn").val(edit.signIn);
                     body.find(".volunteerName").val(edit.volunteerName);
+                    body.find(".activityContent").val(edit.activityContent);
                     body.find(".volunteerScore").val(edit.volunteerScore);
                     body.find(".updateFlag").val(updateFlag);//更新
                     form.render();
@@ -76,9 +78,9 @@ layui.use(['form','layer','table','laytpl'],function(){
             layui.layer.full(window.sessionStorage.getItem("index"));
         })
     }
-    // $(".addNews_btn").click(function(){
-    //     addUser();
-    // })
+    $(".addNews_btn").click(function(){
+        addUser();
+    })
 
     //批量删除
     // $(".delAll_btn").click(function(){
@@ -113,10 +115,8 @@ layui.use(['form','layer','table','laytpl'],function(){
             data = obj.data;
 
         if(layEvent === 'edit'){ //编辑
-            layer.alert("编辑")
             addUser(data, 0);
         }else if(layEvent === 'scoring'){ //评分
-            layer.alert("评分")
             addUser(data, 1);
             // layer.confirm('确定打分此活动？',{icon:3, title:'提示信息'},function(index){
             //     $.get("../../../biz/volunteersignup_saveVolunteerSignUp.action",{
@@ -148,12 +148,6 @@ layui.use(['form','layer','table','laytpl'],function(){
         //         })
         //     });
         // }
-    });
-
-    //列表操作
-    table.on('tool(userList)', function(obj){
-        var layEvent = obj.event,
-            data = obj.data;
     });
 
 })

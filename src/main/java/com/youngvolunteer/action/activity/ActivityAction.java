@@ -122,7 +122,7 @@ public class ActivityAction extends ActionSupport implements ModelDriven<Volunte
     }
 
     /**
-     * join
+     * sign up
      * @return
      */
     public String findAllVolunteerJoinActivity(){
@@ -139,7 +139,7 @@ public class ActivityAction extends ActionSupport implements ModelDriven<Volunte
     }
 
     /**
-     * no join
+     * no sign up
      * @return
      */
     public String findAllVolunteerNojoinActivity(){

@@ -1,5 +1,5 @@
 {
-	"cmsName": "人流量监管系统",
+	"cmsName": "青年志愿者信息管理系统",
 	"version": "v1.0",
 	"author": "soldier",
 	"homePage": "index.html",
@@ -7,8 +7,8 @@
 	"dataBase": "Mysql5.7",
 	"maxUpload": "2M",
 	"userRights": "超级管理员",
-	"description": "人流量监管系统",
+	"description": "青年志愿者信息管理系统",
 	"powerby": "copyright @ 2019 soldier",
 	"record": "京ICP备14040xxx号-1",
-	"keywords": "人流量监管系统"
+	"keywords": "青年志愿者信息管理系统"
 }

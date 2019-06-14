@@ -87,7 +87,9 @@ layui.use(['form','layer','table','laytpl'],function(){
             layer.confirm('确定报名此活动？',{icon:3, title:'提示信息'},function(index){
                 $.get("../../../biz/volunteersignup_saveVolunteerSignUp.action",{
                     activityId : data.activityId,  //将需要报名的newsId作为参数传入
-                    userId : window.sessionStorage.getItem("userId")
+                    activityContent : data.activityContent,  //活动内容
+                    userId : window.sessionStorage.getItem("userId"),
+                    userName : window.sessionStorage.getItem("userName"),
                 },function(data){
                     if (data.code === 0){
                         layer.msg("报名成功");

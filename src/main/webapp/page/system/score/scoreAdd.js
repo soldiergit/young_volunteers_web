@@ -27,6 +27,7 @@ layui.use(['form','layer','laydate'],function(){
             activityId : $(".activityId").val(),    //活动
             signIn : $(".signIn").val(),  //登录名
             volunteerName : $(".volunteerName").val(),
+            activityContent : $(".activityContent").val(),  //活动内容
             volunteerScore : $(".volunteerScore").val(),
         },function(res){
             if (res.code === 0){

@@ -18,6 +18,7 @@ public class VolunteerSignUpEntity {
     private String volunteerId;
     private String volunteerName;
     private String activityId;
+    private String activityContent;
 
     @Id
     @Column(name = "sign_up_id", nullable = false)
@@ -79,6 +80,16 @@ public class VolunteerSignUpEntity {
         this.activityId = activityId;
     }
 
+    @Basic
+    @Column(name = "activity_content", nullable = true, length = 5000)
+    public String getActivityContent() {
+        return activityContent;
+    }
+
+    public void setActivityContent(String activityContent) {
+        this.activityContent = activityContent;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,6 +105,8 @@ public class VolunteerSignUpEntity {
         if (volunteerName != null ? !volunteerName.equals(that.volunteerName) : that.volunteerName != null)
             return false;
         if (activityId != null ? !activityId.equals(that.activityId) : that.activityId != null) return false;
+        if (activityContent != null ? !activityContent.equals(that.activityContent) : that.activityContent != null)
+            return false;
 
         return true;
     }
@@ -106,6 +119,7 @@ public class VolunteerSignUpEntity {
         result = 31 * result + (volunteerId != null ? volunteerId.hashCode() : 0);
         result = 31 * result + (volunteerName != null ? volunteerName.hashCode() : 0);
         result = 31 * result + (activityId != null ? activityId.hashCode() : 0);
+        result = 31 * result + (activityContent != null ? activityContent.hashCode() : 0);
         return result;
     }
 }

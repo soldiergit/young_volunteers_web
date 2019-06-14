@@ -12,6 +12,8 @@ import com.opensymphony.xwork2.ModelDriven;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
+
 /**
  * @Program: youngvolunteer
  * @Author: soldier
@@ -47,20 +49,20 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
     private String userId;
     //用户姓名
     private String userName;
-    //活动内容
+    //活动
     private VolunteerActivityEntity volunteerActivityEntity;
 
 
     //////////////////////////////////////////////////////
     /**
-     * 添加
+     * 添加  -- 报名活动
      */
     public String saveVolunteerSignUp(){
 
         //查询志愿者id
         volunteerSignUpEntity.setVolunteerId(userId);
         //查询志愿者姓名
-        volunteerSignUpEntity.setVolunteerId(userName);
+        volunteerSignUpEntity.setVolunteerName(userName);
 
         logger.info("报名："+volunteerSignUpEntity);
 
@@ -72,9 +74,21 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
     }
 
     /**
-     * 删除
+     * 删除 -- 退出活动
      */
     public String deleteVolunteerSignUp(){
+
+        //查询志愿者id
+        volunteerSignUpEntity.setVolunteerId(userId);
+
+        //查询出该活动
+        volunteerActivityEntity.setActivityId(Integer.parseInt(volunteerSignUpEntity.getActivityId()));
+        VolunteerActivityEntity volunteerActivityEntity_result = activityService.findOneVolunteery(volunteerActivityEntity);
+        if (volunteerActivityEntity_result.getActivityStartTime().getTime() < new Date().getTime() ||
+                volunteerActivityEntity_result.getActivityStartTime().getTime() == new Date().getTime()) {
+            r = R.error("活动已经开始，不能退出！");
+            return SUCCESS;
+        }
 
         volunteerSignUpService.deleteVolunteerSignUp(volunteerSignUpEntity);
 

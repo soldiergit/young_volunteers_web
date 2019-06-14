@@ -119,15 +119,15 @@ layui.use(['form','layer','table','laytpl'],function(){
         var layEvent = obj.event,
             data = obj.data;
          if(layEvent === 'del'){ //删除
-            layer.confirm('确定报名此活动？',{icon:3, title:'提示信息'},function(index){
-                $.get("../../../biz/volunteersignup_saveVolunteerSignUp.action",{
+            layer.confirm('确定退出此活动？',{icon:3, title:'提示信息'},function(index){
+                $.get("../../../biz/volunteersignup_deleteVolunteerSignUp.action",{
                     activityId : data.activityId,  //将需要报名的newsId作为参数传入
                     userId : window.sessionStorage.getItem("userId")
                 },function(data){
                     if (data.code === 0){
-                        layer.msg("删除成功");
+                        layer.msg("退出成功");
                     }else {
-                        layer.msg("删除失败");
+                        layer.msg("退出失败:活动已经开始，不能退出！");
                     }
                     tableIns.reload();
                     layer.close(index);

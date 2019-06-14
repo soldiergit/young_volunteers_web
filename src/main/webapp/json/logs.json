@@ -10,7 +10,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"125",
 			"isAbnormal": "正常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -20,7 +20,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"89",
 			"isAbnormal": "异常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -51,7 +51,7 @@
 			"timeConsuming":"55",
 			"newsLook": "开放浏览",
 			"isAbnormal": "正常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -71,7 +71,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"125",
 			"isAbnormal": "异常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -81,7 +81,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"15",
 			"isAbnormal": "正常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -111,7 +111,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"125",
 			"isAbnormal": "正常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -121,7 +121,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"125",
 			"isAbnormal": "正常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -141,7 +141,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"125",
 			"isAbnormal": "异常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		},
 		{
@@ -151,7 +151,7 @@
 			"ip": "192.169.39.11",
 			"timeConsuming":"125",
 			"isAbnormal": "正常",
-			"operator": "人流量监管系统",
+			"operator": "青年志愿者信息管理系统",
 			"operatingTime": "2017-04-14 00:00:00"
 		}
 	]

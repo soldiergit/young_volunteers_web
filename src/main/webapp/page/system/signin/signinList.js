@@ -2,7 +2,7 @@ layui.use(['form','layer','table','laytpl'],function(){
     var form = layui.form,
         layer = parent.layer === undefined ? layui.layer : top.layer,
         $ = layui.jquery,
-        // laytpl = layui.laytpl,
+        laytpl = layui.laytpl,
         table = layui.table;
 
     //用户列表
@@ -28,7 +28,7 @@ layui.use(['form','layer','table','laytpl'],function(){
             {field: 'activityEndTime', title: '活动结束时间', minWidth:200, align:'center'},
             {field: 'activitySignStartTime', title: '活动报名开始时间', minWidth:200, align:'center'},
             {field: 'activitySignEndTime', title: '活动报名结束时间', minWidth:200, align:'center'},
-            {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
+            // {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });
 
