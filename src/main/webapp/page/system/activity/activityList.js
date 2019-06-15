@@ -26,7 +26,7 @@ layui.use(['form','layer','table','laytpl'],function(){
             {field: 'activityEndTime', title: '活动结束时间', minWidth:200, align:'center'},
             {field: 'activitySignStartTime', title: '活动报名开始时间', minWidth:200, align:'center'},
             {field: 'activitySignEndTime', title: '活动报名结束时间', minWidth:200, align:'center'},
-            {title: '操作', minWidth:175, templet:'#userListBar',fixed:"right",align:"center"}
+            {title: '操作', minWidth:230, templet:'#userListBar',fixed:"right",align:"center"}
         ]]
     });
 
@@ -152,6 +152,32 @@ layui.use(['form','layer','table','laytpl'],function(){
                     tableIns.reload();
                     layer.close(index);
                 })
+            });
+        }else if(layEvent === 'createSignInCode'){ //生成签到码
+            $.post("../../../biz/activity_createActivityQRCode.action", {
+                activityId : data.activityId  //将需要删除的newsId作为参数传入
+            }, function (data) {
+                if (data.code === 0){
+                    layer.msg("生成成功");
+                }else {
+                    layer.msg("生成失败");
+                }
+                tableIns.reload();
+                layer.close(index);
+            })
+        }else if(layEvent === 'seeSignInCode'){ //查看签到码
+            var img = "<img src='" + data.codePath + "' />";
+            // console.log(img)
+            layer.open({
+                type : 1,  //page层类型，如果要显示本地图片，一定要设为1
+                title : '活动'+data.activityCode+'的签到码',
+                //将area这一属性去掉，弹框会匹配图片的大小
+                // area:['auto','auto'],
+                // area: [img.width + 'px', img.height+'px'],
+                shade: 0.6 ,//遮罩透明度
+                maxmin: true ,//允许全屏最小化
+                anim: 1 ,//0-6的动画形式，-1不开启
+                content : img
             });
         }
     });

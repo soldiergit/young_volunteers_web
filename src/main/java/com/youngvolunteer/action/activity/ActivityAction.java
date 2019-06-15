@@ -1,5 +1,11 @@
 package com.youngvolunteer.action.activity;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.youngvolunteer.QR_code.MatrixToImageWriter;
 import com.youngvolunteer.common.PageBean;
 import com.youngvolunteer.model.VolunteerActivityEntity;
 import com.youngvolunteer.service.activity.ActivityService;
@@ -8,7 +14,13 @@ import com.youngvolunteer.vo.R;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -218,6 +230,47 @@ public class ActivityAction extends ActionSupport implements ModelDriven<Volunte
 
         return SUCCESS;
     }
+
+    /**
+     * 生成二维码
+     * @return
+     */
+    public String createActivityQRCode(){
+
+        String path = "/home/soldier/SOLDIER/idea_project/young_volunteers_web/src/main/webapp/images/QRCode";
+        String content = volunteerActivityEntity.getActivityId()+".jpg";
+        try {
+
+            MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+            Map hints = new HashMap();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+            BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 400, 400, hints);
+            //直接用活动编号作为二维码名称
+            File imgPath = new File(path, content);
+            MatrixToImageWriter.writeToFile(bitMatrix, "jpg", imgPath);
+
+            logger.info("二维码地址："+imgPath);
+
+            /**
+             * 存在数据库里面的照片路径是在项目里的相对路径
+             */
+            String imgPath_datebase = ServletActionContext.getRequest().getContextPath() + "/images/QRCode/" + content;
+            VolunteerActivityEntity volunteerActivityEntity_result = activityService.findOneVolunteery(volunteerActivityEntity);
+            volunteerActivityEntity_result.setCodePath(imgPath_datebase);
+            activityService.updateVolunteerActivity(volunteerActivityEntity_result);
+            r = R.ok();
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+            r = R.error();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return SUCCESS;
+    }
+
+
 
     /**
      * 批量删除

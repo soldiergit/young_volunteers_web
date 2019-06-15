@@ -36,6 +36,11 @@
 	<script type="text/html" id="userListBar">
 		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
 		<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+        {{# if(d.codePath ==null){ }}
+		<a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="createSignInCode">生成签到码</a>
+        {{# }if(d.codePath !=null){ }}
+        <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="seeSignInCode">查看签到码</a>
+        {{#  } }}
 	</script>
 </form>
 <script type="text/javascript" src="/young_volunteers_web_war/layui/layui.js"></script>

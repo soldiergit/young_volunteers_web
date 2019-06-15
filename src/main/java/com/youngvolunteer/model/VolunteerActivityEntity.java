@@ -23,6 +23,7 @@ public class VolunteerActivityEntity {
     private Date activityEndTime;
     private Date activitySignStartTime;
     private Date activitySignEndTime;
+    private String codePath;
 
     @Id
     @Column(name = "activity_id", nullable = false)
@@ -124,6 +125,16 @@ public class VolunteerActivityEntity {
         this.activitySignEndTime = activitySignEndTime;
     }
 
+    @Basic
+    @Column(name = "code_path", nullable = true)
+    public String getCodePath() {
+        return codePath;
+    }
+
+    public void setCodePath(String codePath) {
+        this.codePath = codePath;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -149,6 +160,8 @@ public class VolunteerActivityEntity {
             return false;
         if (activitySignEndTime != null ? !activitySignEndTime.equals(that.activitySignEndTime) : that.activitySignEndTime != null)
             return false;
+        if (codePath != null ? !codePath.equals(that.codePath) : that.codePath != null)
+            return false;
 
         return true;
     }
@@ -165,6 +178,7 @@ public class VolunteerActivityEntity {
         result = 31 * result + (activityEndTime != null ? activityEndTime.hashCode() : 0);
         result = 31 * result + (activitySignStartTime != null ? activitySignStartTime.hashCode() : 0);
         result = 31 * result + (activitySignEndTime != null ? activitySignEndTime.hashCode() : 0);
+        result = 31 * result + (codePath != null ? codePath.hashCode() : 0);
         return result;
     }
 }

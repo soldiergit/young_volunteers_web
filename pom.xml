@@ -200,6 +200,24 @@
       <artifactId>httpclient</artifactId>
       <version>4.5.5</version>
     </dependency>
+
+    <!--生成二维码1-->
+    <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.3.0</version>
+    </dependency>
+    <!--生成二维码2-->
+    <!-- https://mvnrepository.com/artifact/QRCode/QRCode_swetake -->
+    <dependency>
+      <groupId>QRCode</groupId>
+      <artifactId>QRCode_swetake</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+
+
   </dependencies>
 
   <build>

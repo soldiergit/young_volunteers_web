@@ -36,5 +36,8 @@
         <property name="activitySignEndTime">
             <column name="activity_sign_end_time" sql-type="date" not-null="true"/>
         </property>
+        <property name="codePath">
+            <column name="code_path" sql-type="varchar(255)" not-null="true"/>
+        </property>
     </class>
 </hibernate-mapping>

@@ -42193,7 +42193,7 @@ var TextureNode = __WEBPACK_IMPORTED_MODULE_0__CompositorNode__["a" /* default *
 
 
 
-// TODO curlnoise demo wrong
+// TODO curlnoise QR_code wrong
 
 // PENDING
 // Use topological sort ?
