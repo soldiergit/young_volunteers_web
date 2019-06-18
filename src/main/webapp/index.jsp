@@ -33,7 +33,8 @@
 <!--</div>-->
 <form class="layui-form">
 
-    <div class="login_face"><img src="./images/head.png" class="userAvatar"></div>
+    <%--<div class="login_face"><img src="./images/head.png" class="userAvatar"></div>--%>
+    <div class="login_face"><img src="./images/head_now.png" class="userAvatar"></div>
     <div class="layui-form-item input-item">
         <label for="loginAccount">用户名</label>
         <input type="text" placeholder="请输入用户名" autocomplete="off" id="loginAccount" class="layui-input loginAccount" lay-verify="required">

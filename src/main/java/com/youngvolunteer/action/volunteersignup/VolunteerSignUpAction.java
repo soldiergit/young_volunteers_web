@@ -135,10 +135,6 @@ public class VolunteerSignUpAction extends ActionSupport implements ModelDriven<
 
         VolunteerSignUpEntity oneVolunteerSignUp = volunteerSignUpService.findOneVolunteerSignUp(volunteerSignUpEntity);
 
-        //获取活动内容
-        volunteerActivityEntity.setActivityId(Integer.parseInt(oneVolunteerSignUp.getActivityId()));
-        VolunteerActivityEntity oneVolunteery = activityService.findOneVolunteery(volunteerActivityEntity);
-
         r = R.ok().put("data",oneVolunteerSignUp);
 
         return SUCCESS;

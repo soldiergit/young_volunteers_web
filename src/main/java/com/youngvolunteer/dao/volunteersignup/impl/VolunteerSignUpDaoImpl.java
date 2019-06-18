@@ -76,7 +76,7 @@ public class VolunteerSignUpDaoImpl implements VolunteerSignUpDao {
             criteria.add(Restrictions.eq("activityId", volunteerSignUpEntity.getActivityId()));
             criteria.add(Restrictions.eq("volunteerId", volunteerSignUpEntity.getVolunteerId()));
         } else {
-            criteria.add(Restrictions.eq("userId", volunteerSignUpEntity.getSignUpId()));
+            criteria.add(Restrictions.eq("signUpId", volunteerSignUpEntity.getSignUpId()));
         }
 
         List<VolunteerSignUpEntity> list = criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();

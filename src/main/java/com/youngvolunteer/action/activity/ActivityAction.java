@@ -232,29 +232,38 @@ public class ActivityAction extends ActionSupport implements ModelDriven<Volunte
     }
 
     /**
-     * 生成二维码
+     * 生成二维码  --  分别在web端的和微信端的images/QRCode文件夹生成二维码图片
      * @return
      */
     public String createActivityQRCode(){
 
-        String path = "/home/soldier/SOLDIER/idea_project/young_volunteers_web/src/main/webapp/images/QRCode";
-        String content = volunteerActivityEntity.getActivityId()+".jpg";
+        /**
+         * web端的地址
+         */
+        String web_path = "/home/soldier/SOLDIER/idea_project/young_volunteers_web/src/main/webapp/images/QRCode";
+        String wechat_path = "/home/soldier/SOLDIER/weChat_projects/young_volunteers_wechat/images/activity/QRCode";
+        String content = volunteerActivityEntity.getActivityId()+"";
+        String content_name = volunteerActivityEntity.getActivityId() + ".jpg";
         try {
 
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             Map hints = new HashMap();
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 400, 400, hints);
-            //直接用活动编号作为二维码名称
-            File imgPath = new File(path, content);
-            MatrixToImageWriter.writeToFile(bitMatrix, "jpg", imgPath);
 
-            logger.info("二维码地址："+imgPath);
+            //直接用活动编号作为二维码名称
+            File web_imgPath = new File(web_path, content_name);  //web端
+            MatrixToImageWriter.writeToFile(bitMatrix, "jpg", web_imgPath);
+            File wechat_imgPath = new File(wechat_path, content_name);  //微信端
+            MatrixToImageWriter.writeToFile(bitMatrix, "jpg", wechat_imgPath);
+
+            logger.info("web端二维码地址："+web_imgPath);
+            logger.info("微信端二维码地址："+wechat_imgPath);
 
             /**
-             * 存在数据库里面的照片路径是在项目里的相对路径
+             * 存在数据库里面的照片路径是在web端项目里的相对路径
              */
-            String imgPath_datebase = ServletActionContext.getRequest().getContextPath() + "/images/QRCode/" + content;
+            String imgPath_datebase = ServletActionContext.getRequest().getContextPath() + "/images/QRCode/" + content_name;
             VolunteerActivityEntity volunteerActivityEntity_result = activityService.findOneVolunteery(volunteerActivityEntity);
             volunteerActivityEntity_result.setCodePath(imgPath_datebase);
             activityService.updateVolunteerActivity(volunteerActivityEntity_result);
