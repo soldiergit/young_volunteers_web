@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.youngvolunteer.model.SysMenuEntity" table="sys_menu" schema="young_volunteer">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="title">
+            <column name="title" sql-type="varchar(255)"/>
+        </property>
+        <property name="roleType">
+            <column name="roleType" sql-type="varchar(255)"/>
+        </property>
+        <property name="icon">
+            <column name="icon" sql-type="varchar(255)"/>
+        </property>
+        <property name="href">
+            <column name="href" sql-type="varchar(255)"/>
+        </property>
+        <property name="spread">
+            <column name="spread" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+        <set name="children" inverse="true">
+            <key/>
+            <one-to-many not-found="ignore" class="com.youngvolunteer.model.SysMenuChildrenEntity"/>
+        </set>
+    </class>
+</hibernate-mapping>
