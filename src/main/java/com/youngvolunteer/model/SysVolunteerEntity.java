@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * @Program: youngvolunteer_Gen
+ * @Program: young_volunteers_web
  * @Author: soldier
  * @Email： 583403411@qq.com
  * @Create: 2019-06-02 15:14

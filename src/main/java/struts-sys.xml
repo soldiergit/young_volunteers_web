@@ -21,5 +21,11 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<!--菜单-->
+		<action name="menu_*" class="com.youngvolunteer.action.menu.MenuAction" method="{1}">
+			<result name="success" type="json">
+				<param name="root">r</param>
+			</result>
+		</action>
 	</package>
 </struts>    

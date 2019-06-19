@@ -57,7 +57,7 @@ public class VolunteerAction extends ActionSupport implements ModelDriven<SysVol
         sysUserEntity.setUserId((int) System.currentTimeMillis());
         sysUserEntity.setLoginAccount(sysVolunteerEntity.getVolunteerEmail());
         sysUserEntity.setLoginPassword("123456");
-        sysUserEntity.setRoleType(3);
+        sysUserEntity.setRoleType(1);
         sysUserEntity.setUserName(sysVolunteerEntity.getVolunteerName());
         sysUserEntity.setUserAvailable(1);
         sysUserService.saveUser(sysUserEntity);

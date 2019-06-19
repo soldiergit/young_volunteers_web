@@ -32,7 +32,7 @@ layui.use(['form','layer','laydate'],function(){
         },function(res){
             if (res.code === 0){
                 top.layer.close(index);
-                top.layer.msg(updateFlag==='0'?"添加活动！":"修改成功");
+                top.layer.msg(updateFlag==='0'?"添加志愿者成功！":"修改志愿者成功");
                 layer.closeAll("iframe");
                 //刷新父页面
                 parent.location.reload();
